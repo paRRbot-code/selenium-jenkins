@@ -56,7 +56,8 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add .
           git commit -m "QA Engineer
-          Co-authored-by: AntoniHub <abgrodriguezfarias@gmail.com>"
+          Co-authored-by: AntoniHub <abgrodriguezfarias@gmail.com>
+          Co-authored-by: paRRbot-code <antonio+4@rodriguezfarias.com>"
  
       - name: Push changes
         uses: ad-m/github-push-action@master
@@ -66,14 +67,12 @@ jobs:
           force: true
 
       - name: Create Pull Request
-        uses: repo-sync/pull-request@v2
+        uses: peter-evans/create-pull-request@v6
         with:
-          destination_branch: "main"
-          source_branch: "test1"
-          github_token: ${{ secrets.PAT }}
-          pr_title: "QA Engineer | Antonio Rodriguez Farias"
-          pr_body: |
-            :wave: Hi, I am Antonio Rodriguez Farias
+          token: ${{ secrets.PAT }}
+          title: "QA Engineer | Antonio Rodriguez Farias"
+          body: |
+            :wave: Hi, I am @AntoniHub
 
             🚀 About me
             Software QA Engineer with experience in Frontend, Backend, Continuous Integration, Databases (SQL and NoSQL), UX/UI, Mobile, Architecture, Linux / macOS / Windows testing.
@@ -88,7 +87,11 @@ jobs:
             📌 Linux Testing with Vagrant & VirtualBox
             📌 Mobile Testing with Android SDK & iOS
             📝 I write in depth on my website about myself [rodriguezfarias.com](https://rodriguezfarias.com/)
-          pr_label: "automerge"
+
+          labels: |
+            automerge
+          branch: main
+          base: test1
 
       - name: automerge
         uses: "pascalgn/automerge-action@v0.16.3"
